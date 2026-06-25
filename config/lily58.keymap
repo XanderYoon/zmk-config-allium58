@@ -159,18 +159,18 @@
             display-name = "Lower";
 
             // ------------------------------------------------------------------------------------------------------------
-            // |       |     |     |      |      |      |                   |UNLOCK|  W/L  |  MAC  |      |       |       |
-            // |  F1   |  F2 |  F3 |  F4  |  F5  |  F6  |                   |  F7  |  F8   |  F9   |  F10 |  F11  |  F12  |
-            // |   `   |  !  |  @  |  #   |  $   |  %   |                   |  ^   |  &    |  *    |  (   |   )   |   ~   |
-            // |       |     |     |      |      |      |        |  |       |      |  _    |  +    |  {   |   }   |  "|"  |
+            // |       |  !  |  @  |  #   |  $   |  %   |                   |UNLOCK|  W/L  |  MAC  |      |       |       |
+            // |   `   |  <  |  >  |  /   |  \   |  |   |                   |  =   |   7   |   8   |  9   |   +   |       |
+            // |   ~   |  (  |  )  |  {   |  }   |  *   |                   |  -   |   4   |   5   |  6   |   _   |       |
+            // |       |  [  |  ]  |  :   |  ;   |  &   |        |  |       |  0   |   1   |   2   |  3   |   .   |       |
             //                     |      |      |      |        |  |       |      |       |       |
 
             bindings = <
-&trans     &trans            &trans             &trans             &trans      &trans                       &studio_unlock  &to 0      &to 1      &trans    &trans    &trans
-&kp F1     &kp F2            &kp F3             &kp F4             &kp F5      &kp F6                       &kp F7          &kp F8     &kp F9     &kp F10   &kp F11   &kp F12
-&kp GRAVE  &kp EXCL          &kp AT             &kp HASH           &kp DOLLAR  &kp PRCNT                    &kp CARET       &kp AMPS   &kp ASTRK  &kp LPAR  &kp RPAR  &kp TILDE
-&trans     &ext_power EP_ON  &ext_power EP_OFF  &ext_power EP_TOG  &trans      &trans     &trans    &trans  &trans          &kp MINUS  &kp PLUS   &kp LBRC  &kp RBRC  &kp PIPE
-                                                &trans             &trans      &trans     &trans    &trans  &trans          &trans     &trans
+&trans     &kp EXCL  &kp AT    &kp HASH   &kp DOLLAR  &kp PRCNT                    &studio_unlock  &to win_linux_layer  &to mac_layer  &trans  &trans    &trans
+&kp GRAVE  &kp LT    &kp GT    &kp FSLH   &kp BSLH    &kp PIPE                     &kp EQUAL       &kp N7              &kp N8        &kp N9  &kp PLUS   &trans
+&kp TILDE  &kp LPAR  &kp RPAR  &kp LBRC   &kp RBRC    &kp ASTRK                    &kp MINUS       &kp N4              &kp N5        &kp N6  &kp UNDER  &trans
+&trans     &kp LBKT  &kp RBKT  &kp COLON  &kp SEMI    &kp AMPS   &trans    &trans  &kp N0          &kp N1              &kp N2        &kp N3  &kp DOT    &trans
+                                      &trans    &trans      &trans    &trans    &trans  &trans         &trans             &trans
             >;
         };
 
@@ -178,7 +178,7 @@
             display-name = "Raise";
 
             // ------------------------------------------------------------------------------------------------------------
-            // |       |     |     |      |      |      |                   |      |       |       |      |       |       |
+            // |       |     |     |      |      |      |                   | PREV |  PP   | NEXT  | MUTE | VOLDN | VOLUP |
             // |   `   |  1  |  2  |  3   |  4   |  5   |                   |  6   |   7   |   8   |  9   |   0   |       |
             // |   F1  |  F2 |  F3 |  F4  |  F5  |  F6  |                   |      |   <-  |   v   |  ^   |  ->   |       |
             // |   F7  |  F8 |  F9 |  F10 |  F11 |  F12 |        |  |       |  +   |   -   |   =   |  [   |   ]   |   \   |
@@ -197,14 +197,14 @@
             display-name = "BT W/L";
 
             // ------------------------------------------------------------------------------------------------------------
+            // |       |     |     |      |      |      |                   | PREV |  PP   | NEXT  | MUTE | VOLDN | VOLUP |
             // |       |     |     |      |      |      |                   |      |       |       |      |       |       |
-            // |       |     |     |      |      |      |                   |      |       |       |      |       |       |
-            // |       |     | S/S |      |      |      |                   | BT1  | BT2   | BT3   | BT4  |       |       |
+            // |       |     | S/S |      |      |      |                   |      | BT1   | BT2   | BT3  | BT4   |       |
             // |   F7  |  F8 |  F9 |  F10 |  F11 |  F12 |        |  |       |  +   |   -   |   =   |  [   |   ]   |   \   |
             //                     |      |      |      |        |  |       |      |       |       |
 
             bindings = <
-&trans  &trans  &trans         &trans  &trans  &trans                    &trans  &trans           &trans             &trans             &trans             &trans
+&trans  &trans  &trans         &trans  &trans  &trans                    &kp C_PREV  &kp C_PP     &kp C_NEXT        &kp C_MUTE        &kp C_VOL_DN      &kp C_VOL_UP
 &trans  &trans  &trans         &trans  &trans  &trans                    &trans  &trans           &trans             &trans             &trans             &trans
 &trans  &trans  &kp LC(LS(S))  &trans  &trans  &trans                    &trans  &bt_profile 0 0  &bt_profile_1 0 0  &bt_profile_2 0 0  &bt_profile_3 0 0  &trans
 &trans  &trans  &trans         &trans  &trans  &trans  &trans    &trans  &trans  &trans           &trans             &trans             &trans             &trans
@@ -216,17 +216,17 @@
             display-name = "BT Mac";
 
             // ------------------------------------------------------------------------------------------------------------
-            // |       |     |     |      |      |      |                   |      |       |       |      |       |       |
-            // |       |     |     |      |      |      |                   |      |       |       |      |       |       |
-            // |       |     | S/S |      |      |      |                   | BT1  | BT2   | BT3   | BT4  |       |       |
-            // |       |     |     |      |      |      |        |  |       |      |       |       |      |       |       |
+            // |       |     |     |      |      |      |                   | PREV |  PP   | NEXT  | MUTE | VOLDN | VOLUP |
+            // |       |     |     |  U   |  UP  |  I   |                   |      |       |       |      |       |       |
+            // |       |     | S/S | LEFT |ENTER |RIGHT |                   |      | BT1   | BT2   | BT3  | BT4   |       |
+            // |       |     |     |  J   | DOWN |  K   |        |  |       |      |       |       |      |       |       |
             //                     |      |      |      |        |  |       |      |       |       |
 
             bindings = <
-&trans  &trans  &trans          &trans  &trans  &trans                    &trans  &trans           &trans             &trans             &trans             &trans
-&trans  &trans  &trans          &trans  &trans  &trans                    &trans  &trans           &trans             &trans             &trans             &trans
-&trans  &trans  &kp LG(LS(N4))  &trans  &trans  &trans                    &trans  &bt_profile 0 0  &bt_profile_1 0 0  &bt_profile_2 0 0  &bt_profile_3 0 0  &trans
-&trans  &trans  &trans          &trans  &trans  &trans  &trans    &trans  &trans  &trans           &trans             &trans             &trans             &trans
+&trans  &trans  &trans          &trans  &trans  &trans                    &kp C_PREV  &kp C_PP     &kp C_NEXT        &kp C_MUTE        &kp C_VOL_DN      &kp C_VOL_UP
+&trans  &trans  &trans          &kp LC(LA(U))  &kp LC(LA(UP))  &kp LC(LA(I))                    &trans  &trans           &trans             &trans             &trans             &trans
+&trans  &trans  &kp LG(LS(N4))  &kp LC(LA(LEFT))  &kp LC(LA(ENTER))  &kp LC(LA(RIGHT))                    &trans  &bt_profile 0 0  &bt_profile_1 0 0  &bt_profile_2 0 0  &bt_profile_3 0 0  &trans
+&trans  &trans  &trans          &kp LC(LA(J))  &kp LC(LA(DOWN))  &kp LC(LA(K))  &trans    &trans  &trans  &trans           &trans             &trans             &trans             &trans
                                 &trans  &trans  &trans  &trans    &trans  &trans  &trans           &trans
             >;
         };
