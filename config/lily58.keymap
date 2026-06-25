@@ -15,7 +15,7 @@
 #define lower_layer 2
 #define raise_layer 3
 #define adjust_layer 4
-#define extra_layer 5
+#define mac_bt_layer 5
 
 / {
     macros {
@@ -41,12 +41,6 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&bt BT_SEL 3>;
-        };
-
-        bt_sel_4: bt_sel_4 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&bt BT_SEL 4>;
         };
 
         bt_clr_0: bt_clr_0 {
@@ -77,12 +71,6 @@
             bindings = <&bt BT_SEL 3>, <&bt BT_CLR>;
         };
 
-        bt_clr_4: bt_clr_4 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <20>;
-            bindings = <&bt BT_SEL 4>, <&bt BT_CLR>;
-        };
     };
 
     behaviors {
@@ -118,21 +106,19 @@
             bindings = <&bt_clr_3>, <&bt_sel_3>;
         };
 
-        bt_profile_4: bt_profile_4 {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <600>;
-            bindings = <&bt_clr_4>, <&bt_sel_4>;
-        };
     };
 
     conditional_layers {
         compatible = "zmk,conditional-layers";
 
-        lower_raise_layer {
-            if-layers = <lower_layer raise_layer>;
+        win_linux_bt_layer {
+            if-layers = <win_linux_layer lower_layer raise_layer>;
             then-layer = <adjust_layer>;
+        };
+
+        mac_conditional_bt_layer {
+            if-layers = <mac_layer lower_layer raise_layer>;
+            then-layer = <mac_bt_layer>;
         };
     };
 
@@ -175,14 +161,14 @@
             display-name = "Lower";
 
             // ------------------------------------------------------------------------------------------------------------
-            // | BTCLR | BT1 | BT2 |  BT3 |  BT4 |  BT5 |                   |UNLOCK|  W/L  |  MAC  |      |       |       |
+            // |       |     |     |      |      |      |                   |UNLOCK|  W/L  |  MAC  |      |       |       |
             // |  F1   |  F2 |  F3 |  F4  |  F5  |  F6  |                   |  F7  |  F8   |  F9   |  F10 |  F11  |  F12  |
             // |   `   |  !  |  @  |  #   |  $   |  %   |                   |  ^   |  &    |  *    |  (   |   )   |   ~   |
             // |       |     |     |      |      |      |        |  |       |      |  _    |  +    |  {   |   }   |  "|"  |
             //                     |      |      |      |        |  |       |      |       |       |
 
             bindings = <
-&bt BT_CLR_ALL  &bt BT_SEL 0      &bt BT_SEL 1       &bt BT_SEL 2       &bt BT_SEL 3  &bt BT_SEL 4                    &studio_unlock  &to win_linux_layer  &to mac_layer  &trans    &trans    &trans
+&trans          &trans            &trans             &trans             &trans        &trans                          &studio_unlock  &to win_linux_layer  &to mac_layer  &trans    &trans    &trans
 &kp F1          &kp F2            &kp F3             &kp F4             &kp F5        &kp F6                          &kp F7          &kp F8     &kp F9     &kp F10   &kp F11   &kp F12
 &kp GRAVE       &kp EXCL          &kp AT             &kp HASH           &kp DOLLAR    &kp PRCNT                       &kp CARET       &kp AMPS   &kp ASTRK  &kp LPAR  &kp RPAR  &kp TILDE
 &trans          &ext_power EP_ON  &ext_power EP_OFF  &ext_power EP_TOG  &trans        &trans        &trans    &trans  &trans          &kp MINUS  &kp PLUS   &kp LBRC  &kp RBRC  &kp PIPE
@@ -210,51 +196,42 @@
         };
 
         adjust_layer {
-            display-name = "BT";
+            display-name = "BT W/L";
 
             // ------------------------------------------------------------------------------------------------------------
             // |       |     |     |      |      |      |                   |      |       |       |      |       |       |
-            // |   `   |  1  |  2  |  3   |  4   |  5   |                   |  6   |   7   |   8   |  9   |   0   |       |
-            // |       | BT1 | BT2 | BT3  | BT4  | BT5  |                   |      |       |       |      |       |       |
+            // |       |     |     |      |      |      |                   |      |       |       |      |       |       |
+            // |       |     | S/S |      |      |      |                   | BT1  | BT2   | BT3   | BT4  |       |       |
             // |   F7  |  F8 |  F9 |  F10 |  F11 |  F12 |        |  |       |  +   |   -   |   =   |  [   |   ]   |   \   |
             //                     |      |      |      |        |  |       |      |       |       |
 
             bindings = <
 &trans  &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &bt_profile 0 0  &bt_profile_1 0 0  &bt_profile_2 0 0  &bt_profile_3 0 0  &bt_profile_4 0 0                    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &kp LC(LS(S))  &trans  &trans  &trans                    &bt_profile 0 0  &bt_profile_1 0 0  &bt_profile_2 0 0  &bt_profile_3 0 0  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans
                         &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans
             >;
         };
 
-        extra_layer {
-            display-name = "Extra";
+        mac_bt_layer {
+            display-name = "BT Mac";
 
             // ------------------------------------------------------------------------------------------------------------
             // |       |     |     |      |      |      |                   |      |       |       |      |       |       |
-            // |   `   |  1  |  2  |  3   |  4   |  5   |                   |  6   |   7   |   8   |  9   |   0   |       |
-            // |   F1  |  F2 |  F3 |  F4  |  F5  |  F6  |                   |      |   <-  |   v   |  ^   |  ->   |       |
-            // |   F7  |  F8 |  F9 |  F10 |  F11 |  F12 |        |  |       |  +   |   -   |   =   |  [   |   ]   |   \   |
+            // |       |     |     |      |      |      |                   |      |       |       |      |       |       |
+            // |       |     | S/S |      |      |      |                   | BT1  | BT2   | BT3   | BT4  |       |       |
+            // |       |     |     |      |      |      |        |  |       |      |       |       |      |       |       |
             //                     |      |      |      |        |  |       |      |       |       |
 
             bindings = <
-&trans  &trans          &trans          &trans           &trans  &trans                                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans          &mmv MOVE_UP    &trans           &trans  &trans                                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans  &msc SCRL_DOWN                          &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans          &trans          &trans           &trans  &msc SCRL_UP    &mkp LCLK    &mkp RCLK  &trans  &trans  &trans  &trans  &trans  &trans
-                                        &trans           &trans  &trans          &trans       &trans     &trans  &trans  &trans
-            >;
-        };
-
-        layer_5 {
-            bindings = <
 &trans  &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &kp LG(LS(N4))  &trans  &trans  &trans                    &bt_profile 0 0  &bt_profile_1 0 0  &bt_profile_2 0 0  &bt_profile_3 0 0  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans
                         &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans
             >;
         };
+
     };
 };
