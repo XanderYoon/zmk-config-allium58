@@ -10,20 +10,137 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 
-#define windows_layer 0
+#define win_linux_layer 0
 #define mac_layer 1
-#define linux_layer 2
-#define lower_layer 3
-#define raise_layer 4
-#define adjust_layer 5
-#define extra_layer 6
+#define lower_layer 2
+#define raise_layer 3
+#define adjust_layer 4
+#define extra_layer 5
 
 / {
+    macros {
+        bt_sel_0: bt_sel_0 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 0>;
+        };
+
+        bt_sel_1: bt_sel_1 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 1>;
+        };
+
+        bt_sel_2: bt_sel_2 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 2>;
+        };
+
+        bt_sel_3: bt_sel_3 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 3>;
+        };
+
+        bt_sel_4: bt_sel_4 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 4>;
+        };
+
+        bt_clr_0: bt_clr_0 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <20>;
+            bindings = <&bt BT_SEL 0>, <&bt BT_CLR>;
+        };
+
+        bt_clr_1: bt_clr_1 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <20>;
+            bindings = <&bt BT_SEL 1>, <&bt BT_CLR>;
+        };
+
+        bt_clr_2: bt_clr_2 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <20>;
+            bindings = <&bt BT_SEL 2>, <&bt BT_CLR>;
+        };
+
+        bt_clr_3: bt_clr_3 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <20>;
+            bindings = <&bt BT_SEL 3>, <&bt BT_CLR>;
+        };
+
+        bt_clr_4: bt_clr_4 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <20>;
+            bindings = <&bt BT_SEL 4>, <&bt BT_CLR>;
+        };
+    };
+
+    behaviors {
+        bt_profile: bt_profile {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <600>;
+            bindings = <&bt_clr_0>, <&bt_sel_0>;
+        };
+
+        bt_profile_1: bt_profile_1 {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <600>;
+            bindings = <&bt_clr_1>, <&bt_sel_1>;
+        };
+
+        bt_profile_2: bt_profile_2 {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <600>;
+            bindings = <&bt_clr_2>, <&bt_sel_2>;
+        };
+
+        bt_profile_3: bt_profile_3 {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <600>;
+            bindings = <&bt_clr_3>, <&bt_sel_3>;
+        };
+
+        bt_profile_4: bt_profile_4 {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <600>;
+            bindings = <&bt_clr_4>, <&bt_sel_4>;
+        };
+    };
+
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+
+        lower_raise_layer {
+            if-layers = <lower_layer raise_layer>;
+            then-layer = <adjust_layer>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
-        windows_layer {
-            display-name = "Windows";
+        win_linux_layer {
+            display-name = "W/L";
 
             // ------------------------------------------------------------------------------------------------------------
             // |  ESC  |  1  |  2  |  3   |  4   |  5   |                   |  6   |  7    |  8    |  9   |   0   |   `   |
@@ -54,30 +171,18 @@
             >;
         };
 
-        linux_layer {
-            display-name = "Linux";
-
-            bindings = <
-&kp ESC    &kp N1  &kp N2  &kp N3    &kp N4    &kp N5                                     &kp N6     &kp N7     &kp N8     &kp N9   &kp N0    &kp GRAVE
-&kp TAB    &kp Q   &kp W   &kp E     &kp R     &kp T                                      &kp Y      &kp U      &kp I      &kp O    &kp P     &kp MINUS
-&kp LCTRL  &kp A   &kp S   &kp D     &kp F     &kp G                                      &kp H      &kp J      &kp K      &kp L    &kp SEMI  &kp SQT
-&kp LSHFT  &kp Z   &kp X   &kp C     &kp V     &kp B          &kp LBKT         &kp RBKT   &kp N      &kp M      &kp COMMA  &kp DOT  &kp FSLH  &kp RSHFT
-                           &kp LALT  &kp LGUI  &mo lower_layer  &kp BACKSPACE    &kp SPACE  &mo raise_layer  &kp ENTER  &kp RGUI
-            >;
-        };
-
         lower_layer {
             display-name = "Lower";
 
             // ------------------------------------------------------------------------------------------------------------
-            // | BTCLR | BT1 | BT2 |  BT3 |  BT4 |  BT5 |                   |UNLOCK|  WIN  |  MAC  |LINUX |       |       |
+            // | BTCLR | BT1 | BT2 |  BT3 |  BT4 |  BT5 |                   |UNLOCK|  W/L  |  MAC  |      |       |       |
             // |  F1   |  F2 |  F3 |  F4  |  F5  |  F6  |                   |  F7  |  F8   |  F9   |  F10 |  F11  |  F12  |
             // |   `   |  !  |  @  |  #   |  $   |  %   |                   |  ^   |  &    |  *    |  (   |   )   |   ~   |
             // |       |     |     |      |      |      |        |  |       |      |  _    |  +    |  {   |   }   |  "|"  |
             //                     |      |      |      |        |  |       |      |       |       |
 
             bindings = <
-&bt BT_CLR_ALL  &bt BT_SEL 0      &bt BT_SEL 1       &bt BT_SEL 2       &bt BT_SEL 3  &bt BT_SEL 4                    &studio_unlock  &to windows_layer  &to mac_layer  &to linux_layer  &trans    &trans
+&bt BT_CLR_ALL  &bt BT_SEL 0      &bt BT_SEL 1       &bt BT_SEL 2       &bt BT_SEL 3  &bt BT_SEL 4                    &studio_unlock  &to win_linux_layer  &to mac_layer  &trans    &trans    &trans
 &kp F1          &kp F2            &kp F3             &kp F4             &kp F5        &kp F6                          &kp F7          &kp F8     &kp F9     &kp F10   &kp F11   &kp F12
 &kp GRAVE       &kp EXCL          &kp AT             &kp HASH           &kp DOLLAR    &kp PRCNT                       &kp CARET       &kp AMPS   &kp ASTRK  &kp LPAR  &kp RPAR  &kp TILDE
 &trans          &ext_power EP_ON  &ext_power EP_OFF  &ext_power EP_TOG  &trans        &trans        &trans    &trans  &trans          &kp MINUS  &kp PLUS   &kp LBRC  &kp RBRC  &kp PIPE
@@ -105,19 +210,19 @@
         };
 
         adjust_layer {
-            display-name = "Adjust";
+            display-name = "BT";
 
             // ------------------------------------------------------------------------------------------------------------
             // |       |     |     |      |      |      |                   |      |       |       |      |       |       |
             // |   `   |  1  |  2  |  3   |  4   |  5   |                   |  6   |   7   |   8   |  9   |   0   |       |
-            // |   F1  |  F2 |  F3 |  F4  |  F5  |  F6  |                   |      |   <-  |   v   |  ^   |  ->   |       |
+            // |       | BT1 | BT2 | BT3  | BT4  | BT5  |                   |      |       |       |      |       |       |
             // |   F7  |  F8 |  F9 |  F10 |  F11 |  F12 |        |  |       |  +   |   -   |   =   |  [   |   ]   |   \   |
             //                     |      |      |      |        |  |       |      |       |       |
 
             bindings = <
 &trans  &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &bt_profile 0 0  &bt_profile_1 0 0  &bt_profile_2 0 0  &bt_profile_3 0 0  &bt_profile_4 0 0                    &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans
                         &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans
             >;
