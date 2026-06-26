@@ -21,53 +21,53 @@
         bt_sel_0: bt_sel_0 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&bt BT_SEL 0>;
+            bindings = <&bt BT_SEL 0 &to mac_layer>;
         };
 
         bt_sel_1: bt_sel_1 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&bt BT_SEL 1>;
+            bindings = <&bt BT_SEL 1 &to mac_layer>;
         };
 
         bt_sel_2: bt_sel_2 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&bt BT_SEL 2>;
+            bindings = <&bt BT_SEL 2 &to win_linux_layer>;
         };
 
         bt_sel_3: bt_sel_3 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&bt BT_SEL 3>;
+            bindings = <&bt BT_SEL 3 &to win_linux_layer>;
         };
 
         bt_clr_0: bt_clr_0 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <20>;
-            bindings = <&bt BT_SEL 0 &bt BT_CLR>;
+            bindings = <&bt BT_SEL 0 &bt BT_CLR &to mac_layer>;
         };
 
         bt_clr_1: bt_clr_1 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <20>;
-            bindings = <&bt BT_SEL 1 &bt BT_CLR>;
+            bindings = <&bt BT_SEL 1 &bt BT_CLR &to mac_layer>;
         };
 
         bt_clr_2: bt_clr_2 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <20>;
-            bindings = <&bt BT_SEL 2 &bt BT_CLR>;
+            bindings = <&bt BT_SEL 2 &bt BT_CLR &to win_linux_layer>;
         };
 
         bt_clr_3: bt_clr_3 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <20>;
-            bindings = <&bt BT_SEL 3 &bt BT_CLR>;
+            bindings = <&bt BT_SEL 3 &bt BT_CLR &to win_linux_layer>;
         };
     };
 
@@ -126,14 +126,14 @@
             display-name = "W/L";
 
             // ------------------------------------------------------------------------------------------------------------
-            // |  ESC  |  1  |  2  |  3   |  4   |  5   |                   |  6   |  7    |  8    |  9   |   0   |   `   |
+            // |  ESC  |  1  |  2  |  3   |  4   |  5   |                   |  6   |  7    |  8    |  9   |   0   |   =   |
             // |  TAB  |  Q  |  W  |  E   |  R   |  T   |                   |  Y   |  U    |  I    |  O   |   P   |   -   |
             // |  CTRL |  A  |  S  |  D   |  F   |  G   |                   |  H   |  J    |  K    |  L   |   ;   |   '   |
             // | SHIFT |  Z  |  X  |  C   |  V   |  B   |   "["  |  |  "]"  |  N   |  M    |  ,    |  .   |   /   | SHIFT |
             //                     | ALT  | GUI  | LOWER|  SPACE |  | ENTER | RAISE| BSPC  | GUI   |
 
             bindings = <
-&kp LEFT_COMMAND  &kp N1  &kp N2  &kp N3     &kp N4   &kp N5                              &kp N6  &kp N7     &kp N8             &kp N9   &kp N0    &kp GRAVE
+&kp LEFT_COMMAND  &kp N1  &kp N2  &kp N3     &kp N4   &kp N5                              &kp N6  &kp N7     &kp N8             &kp N9   &kp N0    &kp EQUAL
 &kp TAB           &kp Q   &kp W   &kp E      &kp R    &kp T                               &kp Y   &kp U      &kp I              &kp O    &kp P     &kp MINUS
 &kp LCTRL         &kp A   &kp S   &kp D      &kp F    &kp G                               &kp H   &kp J      &kp K              &kp L    &kp SEMI  &kp SQT
 &kp LSHFT         &kp Z   &kp X   &kp C      &kp V    &kp B   &kp LBKT         &kp RBKT   &kp N   &kp M      &kp COMMA          &kp DOT  &kp FSLH  &kp RSHFT
@@ -147,7 +147,7 @@
             // Mac swaps the thumb Command/Option order while leaving the rest of the base layout unchanged.
 
             bindings = <
-&kp LALT   &kp N1  &kp N2  &kp N3    &kp N4   &kp N5                              &kp N6  &kp N7     &kp N8     &kp N9   &kp N0    &kp GRAVE
+&kp LALT   &kp N1  &kp N2  &kp N3    &kp N4   &kp N5                              &kp N6  &kp N7     &kp N8     &kp N9   &kp N0    &kp EQUAL
 &kp TAB    &kp Q   &kp W   &kp E     &kp R    &kp T                               &kp Y   &kp U      &kp I      &kp O    &kp P     &kp MINUS
 &kp LCTRL  &kp A   &kp S   &kp D     &kp F    &kp G                               &kp H   &kp J      &kp K      &kp L    &kp SEMI  &kp SQT
 &kp LSHFT  &kp Z   &kp X   &kp C     &kp V    &kp B   &kp LBKT         &kp RBKT   &kp N   &kp M      &kp COMMA  &kp DOT  &kp FSLH  &kp RSHFT
@@ -159,16 +159,16 @@
             display-name = "Lower";
 
             // ------------------------------------------------------------------------------------------------------------
-            // |       |  !  |  @  |  #   |  $   |  %   |                   |UNLOCK|  W/L  |  MAC  |      |       |       |
-            // |   `   |  <  |  >  |  /   |  \   |  |   |                   |  =   |   7   |   8   |  9   |   +   |       |
-            // |   ~   |  (  |  )  |  {   |  }   |  *   |                   |  -   |   4   |   5   |  6   |   _   |       |
+            // |       |  !  |  @  |  #   |  $   |  %   |                   |UNLOCK|       |       |      |       |       |
+            // |       |  <  |  >  |  /   |  \   |  |   |                   |  =   |   7   |   8   |  9   |   +   |       |
+            // |       |  (  |  )  |  {   |  }   |  *   |                   |  -   |   4   |   5   |  6   |   _   |       |
             // |       |  [  |  ]  |  :   |  ;   |  &   |        |  |       |  0   |   1   |   2   |  3   |   .   |       |
             //                     |      |      |      |        |  |       |      |       |       |
 
             bindings = <
-&trans     &kp EXCL  &kp AT    &kp HASH   &kp DOLLAR  &kp PRCNT                    &studio_unlock  &to win_linux_layer  &to mac_layer  &trans  &trans    &trans
-&kp GRAVE  &kp LT    &kp GT    &kp FSLH   &kp BSLH    &kp PIPE                     &kp EQUAL       &kp N7              &kp N8        &kp N9  &kp PLUS   &trans
-&kp TILDE  &kp LPAR  &kp RPAR  &kp LBRC   &kp RBRC    &kp ASTRK                    &kp MINUS       &kp N4              &kp N5        &kp N6  &kp UNDER  &trans
+&trans     &kp EXCL  &kp AT    &kp HASH   &kp DOLLAR  &kp PRCNT                    &studio_unlock  &trans           &trans      &trans  &trans    &trans
+&trans     &kp LT    &kp GT    &kp FSLH   &kp BSLH    &kp PIPE                     &kp EQUAL       &kp N7              &kp N8        &kp N9  &kp PLUS   &trans
+&trans     &kp LPAR  &kp RPAR  &kp LBRC   &kp RBRC    &kp ASTRK                    &kp MINUS       &kp N4              &kp N5        &kp N6  &kp UNDER  &trans
 &trans     &kp LBKT  &kp RBKT  &kp COLON  &kp SEMI    &kp AMPS   &trans    &trans  &kp N0          &kp N1              &kp N2        &kp N3  &kp DOT    &trans
                                       &trans    &trans      &trans    &trans    &trans  &trans         &trans             &trans
             >;
@@ -178,18 +178,18 @@
             display-name = "Raise";
 
             // ------------------------------------------------------------------------------------------------------------
-            // |       |     |     |      |      |      |                   | PREV |  PP   | NEXT  | MUTE | VOLDN | VOLUP |
-            // |   `   |  1  |  2  |  3   |  4   |  5   |                   |  6   |   7   |   8   |  9   |   0   |       |
-            // |   F1  |  F2 |  F3 |  F4  |  F5  |  F6  |                   |      |   <-  |   v   |  ^   |  ->   |       |
-            // |   F7  |  F8 |  F9 |  F10 |  F11 |  F12 |        |  |       |  +   |   -   |   =   |  [   |   ]   |   \   |
+            // |       |     |     |      |      |      |                   |      |       |       |      |       |       |
+            // |       |     |  UP |      |      |      |                   |      |       |       |      |       |       |
+            // |       |LEFT |DOWN |RIGHT |      |      |                   | LEFT | DOWN  |  UP   |RIGHT |       |       |
+            // |       |     |     |      |      |      |        |  |       |      |       |       |      |       |       |
             //                     |      |      |      |        |  |       |      |       |       |
 
             bindings = <
-&trans     &trans  &trans  &trans   &trans   &trans                     &trans       &trans     &trans     &trans    &trans     &trans
-&kp GRAVE  &kp N1  &kp N2  &kp N3   &kp N4   &kp N5                     &kp N6       &kp N7     &kp N8     &kp N9    &kp N0     &trans
-&kp F1     &kp F2  &kp F3  &kp F4   &kp F5   &kp F6                     &trans       &kp LEFT   &kp DOWN   &kp UP    &kp RIGHT  &trans
-&kp F7     &kp F8  &kp F9  &kp F10  &kp F11  &kp F12  &trans    &trans  &kp KP_PLUS  &kp MINUS  &kp EQUAL  &kp LBKT  &kp RBKT   &kp BSLH
-                           &trans   &trans   &trans   &trans    &trans  &trans       &trans     &trans
+&trans  &trans     &trans     &trans      &trans  &trans                    &trans     &trans     &trans  &trans     &trans  &trans
+&trans  &trans     &kp UP     &trans      &trans  &trans                    &trans     &trans     &trans  &trans     &trans  &trans
+&trans  &kp LEFT   &kp DOWN   &kp RIGHT   &trans  &trans                    &kp LEFT   &kp DOWN   &kp UP  &kp RIGHT  &trans  &trans
+&trans  &trans     &trans     &trans      &trans  &trans  &trans    &trans  &trans     &trans     &trans  &trans     &trans  &trans
+                              &trans      &trans  &trans  &trans    &trans  &trans     &trans     &trans
             >;
         };
 
@@ -199,14 +199,14 @@
             // ------------------------------------------------------------------------------------------------------------
             // |       |     |     |      |      |      |                   | PREV |  PP   | NEXT  | MUTE | VOLDN | VOLUP |
             // |       |     |     |      |      |      |                   |      |       |       |      |       |       |
-            // |       |     | S/S |      |      |      |                   |      | BT1   | BT2   | BT3  | BT4   |       |
+            // |       |     | S/S |      |      |      |                   | OS   | BT1   | BT2   | BT3  | BT4   |       |
             // |   F7  |  F8 |  F9 |  F10 |  F11 |  F12 |        |  |       |  +   |   -   |   =   |  [   |   ]   |   \   |
             //                     |      |      |      |        |  |       |      |       |       |
 
             bindings = <
 &trans  &trans  &trans         &trans  &trans  &trans                    &kp C_PREV  &kp C_PP     &kp C_NEXT        &kp C_MUTE        &kp C_VOL_DN      &kp C_VOL_UP
 &trans  &trans  &trans         &trans  &trans  &trans                    &trans  &trans           &trans             &trans             &trans             &trans
-&trans  &trans  &kp LC(LS(S))  &trans  &trans  &trans                    &trans  &bt_profile 0 0  &bt_profile_1 0 0  &bt_profile_2 0 0  &bt_profile_3 0 0  &trans
+&trans  &trans  &kp LC(LS(S))  &trans  &trans  &trans                    &tog mac_layer  &bt_profile 0 0  &bt_profile_1 0 0  &bt_profile_2 0 0  &bt_profile_3 0 0  &trans
 &trans  &trans  &trans         &trans  &trans  &trans  &trans    &trans  &trans  &trans           &trans             &trans             &trans             &trans
                                &trans  &trans  &trans  &trans    &trans  &trans  &trans           &trans
             >;
@@ -218,14 +218,14 @@
             // ------------------------------------------------------------------------------------------------------------
             // |       |     |     |      |      |      |                   | PREV |  PP   | NEXT  | MUTE | VOLDN | VOLUP |
             // |       |     |     |  U   |  UP  |  I   |                   |      |       |       |      |       |       |
-            // |       |     | S/S | LEFT |ENTER |RIGHT |                   |      | BT1   | BT2   | BT3  | BT4   |       |
+            // |       |     | S/S | LEFT |ENTER |RIGHT |                   | OS   | BT1   | BT2   | BT3  | BT4   |       |
             // |       |     |     |  J   | DOWN |  K   |        |  |       |      |       |       |      |       |       |
             //                     |      |      |      |        |  |       |      |       |       |
 
             bindings = <
 &trans  &trans  &trans          &trans  &trans  &trans                    &kp C_PREV  &kp C_PP     &kp C_NEXT        &kp C_MUTE        &kp C_VOL_DN      &kp C_VOL_UP
 &trans  &trans  &trans          &kp LC(LA(U))  &kp LC(LA(UP))  &kp LC(LA(I))                    &trans  &trans           &trans             &trans             &trans             &trans
-&trans  &trans  &kp LG(LS(N4))  &kp LC(LA(LEFT))  &kp LC(LA(ENTER))  &kp LC(LA(RIGHT))                    &trans  &bt_profile 0 0  &bt_profile_1 0 0  &bt_profile_2 0 0  &bt_profile_3 0 0  &trans
+&trans  &trans  &kp LG(LS(N4))  &kp LC(LA(LEFT))  &kp LC(LA(ENTER))  &kp LC(LA(RIGHT))                    &tog mac_layer  &bt_profile 0 0  &bt_profile_1 0 0  &bt_profile_2 0 0  &bt_profile_3 0 0  &trans
 &trans  &trans  &trans          &kp LC(LA(J))  &kp LC(LA(DOWN))  &kp LC(LA(K))  &trans    &trans  &trans  &trans           &trans             &trans             &trans             &trans
                                 &trans  &trans  &trans  &trans    &trans  &trans  &trans           &trans
             >;
